@@ -1,0 +1,20 @@
+{
+  "type": "API",
+  "/annio": {
+    "requests": [
+      {
+        "name": "input",
+        "contentType": "application/json",
+        "content": {
+          "nombre": "Andoni",
+          "anio_nacimiento": 2000,
+          "carrera": "Ingeniería",
+          "entidad_federativa": "CDMX"
+        },
+        "queryParams": {},
+        "pathParams": {}
+      }
+    ],
+    "defaultRequest": "input"
+  }
+}

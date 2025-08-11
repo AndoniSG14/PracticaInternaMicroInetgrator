@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/apiannio" name="ApiAnnio" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST" uri-template="/annio">
+        <inSequence>
+            <log category="INFO" logMessageID="false" logFullPayload="false">
+                <message>${payload}</message>
+            </log>
+            <filter source="json-eval($.anio_nacimiento)" regex="^[0-9]{4}$">
+                <then>
+                    <script language="js"><![CDATA[ 
+                var payload = mc.getPayloadJSON();
+                var nombre = payload.nombre;
+                var anio_nacimiento = payload.anio_nacimiento;
+                var carrera = payload.carrera;
+                var entidad = payload.entidad_federativa;
+                var camposCompletos = true;
+                if (!nombre || !anio_nacimiento || !carrera || !entidad) {
+                    camposCompletos = false;
+                }
+                mc.setProperty("camposCompletos", camposCompletos);
+            ]]></script>
+                    <log category="INFO" logMessageID="false" logFullPayload="false">
+                        <message>BUSCANDO ${payload}</message>
+                    </log>
+                    <filter xpath="get-property('camposCompletos') = 'true'">
+                        <then>
+                            <sequence key="main_in_seq"/>
+                        </then>
+                        <else>
+                            <payloadFactory media-type="json">
+                                <format>{ "error": "Favor de enviar todos los datos" }</format>
+                            </payloadFactory>
+                            <property name="HTTP_SC" scope="axis2" type="STRING" value="400"/>
+                            <property name="RESPONSE" value="true"/>
+                            <respond/>
+                        </else>
+                    </filter>
+                </then>
+                <else>
+                    <payloadFactory media-type="json">
+                        <format>{"error":"Formato inválido en anio_nacimiento"}</format>
+                    </payloadFactory>
+                    <property name="HTTP_SC" scope="axis2" type="STRING" value="500"/>
+                    <property name="RESPONSE" scope="default" type="STRING" value="true"/>
+                    <respond/>
+                </else>
+            </filter>
+            <respond/>
+        </inSequence>
+        <faultSequence/>
+    </resource>
+</api>

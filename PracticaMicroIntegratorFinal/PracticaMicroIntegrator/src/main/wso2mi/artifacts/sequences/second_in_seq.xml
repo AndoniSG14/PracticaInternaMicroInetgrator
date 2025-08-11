@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="second_in_seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <http.get configKey="tipoAnnio">
+        <relativePath>/${payload.anio_nacimiento}</relativePath>
+        <headers>[]</headers>
+        <forceScAccepted>false</forceScAccepted>
+        <disableChunking>false</disableChunking>
+        <forceHttp10>false</forceHttp10>
+        <noKeepAlive>false</noKeepAlive>
+        <responseVariable>respuestaTipoAnnio</responseVariable>
+        <overwriteBody>true</overwriteBody>
+    </http.get>
+    <property name="Datos" scope="default" type="STRING" expression="${payload}"/>
+    <sequence key="third_in_seq"/>
+</sequence>
