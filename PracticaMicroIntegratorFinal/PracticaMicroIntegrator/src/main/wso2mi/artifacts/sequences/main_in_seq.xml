@@ -1,37 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="main_in_seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-    <script language="js"><![CDATA[
-        var payload = mc.getPayloadJSON();
-
-        if (!isNaN(payload.anio_nacimiento)) {
-            mc.setProperty("anioValido", true);  
-        } else {
-            mc.setProperty("anioValido", false); 
-        }
-
-
-    
-    ]]></script>
-    <filter xpath="get-property('anioValido') = 'true'">
-        <then>
-            <sequence key="second_in_seq"/>
-            <payloadFactory media-type="json" template-type="default">
-                <format>$1</format>
-                <args>
-                    <arg evaluator="xml" expression="get-property('informacion_completa')"/>
-                </args>
-            </payloadFactory>
-            <log category="INFO" logMessageID="false" logFullPayload="false">
-                <message>${payload} log final</message>
-            </log>
-        </then>
-        <else>
-            <payloadFactory media-type="json" template-type="default">
-                <format>{ "error": "Año no válido, escribe un años válido }</format>
-            </payloadFactory>
-            <property name="HTTP_SC" scope="axis2" type="STRING" value="500"/>
-            <property name="RESPONSE" value="true"/>
-            <respond/>
-        </else>
-    </filter>
+    <log category="INFO" logMessageID="false" logFullPayload="false">
+        <message>${payload}</message>
+    </log>
+    <sequence key="second_in_seq"/>
 </sequence>

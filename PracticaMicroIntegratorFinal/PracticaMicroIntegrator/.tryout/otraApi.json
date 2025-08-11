@@ -1,6 +1,6 @@
 {
   "type": "API",
-  "/annio": {
+  "/": {
     "requests": [
       {
         "name": "input",

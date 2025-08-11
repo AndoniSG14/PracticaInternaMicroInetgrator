@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="third_in_seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property name="YearType" scope="default" type="STRING" expression="${payload}"/>
     <script language="js"><![CDATA[
-    var datosString = mc.getPayloadJSON();
-
-    var tipoAnnioJSON = JSON.parse(mc.getProperty("Datos"));
+    var  tipoAnnioJSON= JSON.parse(mc.getProperty("YearType"));
+    var  datosString= JSON.parse(mc.getProperty("Datos"));
 
 
     const añoActual = new Date().getFullYear();
 
-    var edad = añoActual - parseInt(datosString.anio_nacimiento);
+    var edad = añoActual - parseInt(datosString.anioNacimiento);
 
     var informacion = {
         "Nombre": datosString.nombre,
-        "Año de nacimiento": datosString.anio_nacimiento,
+        "Año de nacimiento": datosString.anioNacimiento,
         "Carrera": datosString.carrera,
         "Ciudad": datosString.entidad_federativa,
         "Edad": edad,
         "Tipo de año": tipoAnnioJSON.text
     };
-      mc.setProperty("informacion_completa", JSON.stringify(informacion));
+    mc.setProperty("informacion_completa", JSON.stringify(informacion));
     mc.setPayloadJSON(informacion);
     
         ]]></script>
     <log category="INFO" logMessageID="false" logFullPayload="false">
-        <message>${payload}</message>
+        <message>${payload} UltimoPaylaod</message>
     </log>
+    
+    <respond/>
 </sequence>
