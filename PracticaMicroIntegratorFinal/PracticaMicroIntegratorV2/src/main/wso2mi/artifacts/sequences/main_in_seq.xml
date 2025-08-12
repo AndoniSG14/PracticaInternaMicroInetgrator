@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="main_in_seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
     <log category="INFO" logMessageID="false" logFullPayload="false">
-        <message>${payload}</message>
+        <message>${payload} MAIN_SEQ</message>
     </log>
-    <sequence key="second_in_seq"/>
+    <sequence key="Second_in_seq"/>
 </sequence>

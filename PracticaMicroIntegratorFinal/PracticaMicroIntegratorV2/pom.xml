@@ -3,11 +3,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.microintegrator.projects</groupId>
-  <artifactId>practicamicrointegrator</artifactId>
+  <artifactId>practicamicrointegratorv2</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>PracticaMicroIntegrator</name>
-  <description>PracticaMicroIntegrator</description>
+  <name>PracticaMicroIntegratorV2</name>
+  <description>PracticaMicroIntegratorV2</description>
   <repositories>
     <repository>
         <id>wso2-nexus</id>
@@ -383,7 +383,7 @@
   </build>
   <properties>
     <projectType>integration-project</projectType>
-    <uuid>1a08ffbb-69c5-4ef3-aa19-298e577f8b42</uuid>
+    <uuid>c9936f4a-a8ca-4979-bdba-0a37e2fe0d2e</uuid>
     <!-- <archiveLocation>configure a custom target directory for CAPP</archiveLocation> -->
     <keystore.type>JKS</keystore.type>
     <keystore.name>wso2carbon.jks</keystore.name>

@@ -1,9 +1,9 @@
 {
   "type": "API",
-  "/": {
+  "/annio": {
     "requests": [
       {
-        "name": "input",
+        "name": "Body",
         "contentType": "application/json",
         "content": {
           "nombre": "Andoni",
@@ -15,6 +15,6 @@
         "pathParams": {}
       }
     ],
-    "defaultRequest": "input"
+    "defaultRequest": "Body"
   }
 }

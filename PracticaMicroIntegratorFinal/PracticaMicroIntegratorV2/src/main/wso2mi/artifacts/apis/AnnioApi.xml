@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/annioapi" name="AnnioApi" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST" uri-template="/annio">
+        <inSequence>
+            <sequence key="main_in_seq"/>
+        </inSequence>
+        <faultSequence>
+        </faultSequence>
+        <outSequence>
+            <respond/>
+        </outSequence>
+    </resource>
+</api>

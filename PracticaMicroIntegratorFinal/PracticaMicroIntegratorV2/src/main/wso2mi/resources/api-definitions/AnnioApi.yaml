@@ -1,12 +1,12 @@
 openapi: 3.0.1
 info:
-  title: otraApi
-  description: API Definition of otraApi
+  title: AnnioApi
+  description: API Definition of AnnioApi
   version: 1.0.0
 servers:
-- url: http://localhost:8290/apiannio/annio
+- url: http://localhost:8290/annioapi
 paths:
-  /:
+  /annio:
     post:
       requestBody:
         description: Sample Payload

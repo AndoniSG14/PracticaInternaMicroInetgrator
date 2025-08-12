@@ -1,43 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence name="second_in_seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-    <property name="Datos" scope="default" type="JSON" expression="${payload}"/>
+<sequence name="Second_in_seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property name="Datos" scope="default" type="STRING" expression="${payload}"/>
     <call>
         <endpoint key="BackEnd"/>
     </call>
     <switch source="get-property('axis2','HTTP_SC')">
-        
         <case regex="200">
-            <log category="INFO" logMessageID="false" logFullPayload="false">
-                <message>cd 200</message>
-            </log>
+            <property name="TipoAnniooo" scope="default" type="STRING" expression="${payload}"/>
+            <payloadFactory media-type="json" template-type="default">
+                <format>${properties.synapse.Datos}</format>
+            </payloadFactory>
             <sequence key="third_in_seq"/>
         </case>
         <case regex="400">
-            <log category="INFO" logMessageID="false" logFullPayload="false">
-                <message>cd 400</message>
-            </log>
             <payloadFactory media-type="json" template-type="default">
                 <format>{Año inválido, ingresa un año válido}</format>
             </payloadFactory>
-            <respond/>
         </case>
         <case regex="500">
-            <log category="INFO" logMessageID="false" logFullPayload="false">
-                <message>cd 500</message>
-            </log>
             <payloadFactory media-type="json" template-type="default">
                 <format>{Lo sentimos, ocurrió un error interno en el servidor. Por favor, intenta nuevamente más tarde.}</format>
             </payloadFactory>
-            <respond/>
         </case>
         <default>
-            <log category="INFO" logMessageID="false" logFullPayload="false">
-                <message>Default</message>
-            </log>
             <payloadFactory media-type="json" template-type="default">
                 <format>{Se produjo un fallo inesperado en el servidor al procesar la solicitud}</format>
             </payloadFactory>
-            <respond/>
         </default>
     </switch>
+    <respond/>
 </sequence>

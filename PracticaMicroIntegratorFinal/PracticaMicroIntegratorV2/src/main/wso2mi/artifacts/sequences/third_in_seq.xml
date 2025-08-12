@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="third_in_seq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+
+    <script language="js"><![CDATA[
+    
+    var tipoAnnio = JSON.parse(mc.getProperty("TipoAnniooo"));
+    
+    var datosString = mc.getPayloadJSON();
+
+    const añoActual = new Date().getFullYear();
+    var edad = añoActual - parseInt(datosString.anioNacimiento);
+
+    var informacion = {
+        "Nombre": datosString.nombre,
+        "Año de nacimiento": datosString.anioNacimiento,
+        "Carrera": datosString.carrera,
+        "Ciudad": datosString.entidad_federativa,
+        "Edad": edad,
+        "Tipo Ano": tipoAnnio.text
+    };
+    
+    mc.setPayloadJSON(informacion);
+]]></script>
+</sequence>
